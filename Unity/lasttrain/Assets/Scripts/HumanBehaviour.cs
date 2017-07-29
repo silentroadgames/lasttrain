@@ -74,8 +74,7 @@ namespace MalagaJam.LastTrain
 
 		#region METHODS
 		/// <summary>
-		/// Compara la emocion
-		/// de la cpu con la reacción del jugador,
+		/// Compara la emocion del jugador con la del humano instanciado
 		/// e incrementa una emocion basandonos en la tabla.
 		/// </summary>
 		/// <returns>void.</returns>
@@ -199,36 +198,35 @@ namespace MalagaJam.LastTrain
 				break;
 			}
 		}
-
-		/// <summary>
-		/// Devuelve true 
-		/// si ('suma de todas sus emociones'/5) == 50
-		/// DEPRECADO: No hay final feliz, el juego es infinito.
-		// void isSaved () {}
 		#endregion
 
 		#region EVENTS
 		/// <summary>
-		/// En game loop, se actualiza el valor 
-		/// alpha de la textura.
+		/// Se actualiza el valor  alpha de la textura en el game loop.
 		/// </summary>
 		void updateDoomedValue () {
 			nDoomed = ((joy + fear + sadness + contempt + fury) / 5);
 		}
+
+		/// <summary>
+		/// Muestra la GUI de reiniciar.
+		/// </summary>
+		void triggerTryAgainGUI () {
+				Debug.Log ("TODO: Crear GUI de Reiniciar.");
+		}
 		#endregion
 
 		#region GAME LOOP
-		// Use this for initialization
+		// Usa esto para inicializar
 		void Start () {
 			
 		}
 		
-		// Update is called once per frame.
+		// Se llama Update una vez por frame.
 		void Update () {
 			this.updateDoomedValue ();
-			if (this.nDoomed >= 100) {
-				// Crear GUI de Reiniciar
-				Debug.Log ("TODO: Crear GUI de Reiniciar.");
+			if (this.nDoomed != 100) {
+				triggerTryAgainGUI();
 			};
 		}
 		#endregion
