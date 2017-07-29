@@ -1,0 +1,182 @@
+fileFormatVersion: 2
+guid: 14d3f83c937934edfa213ebcc706a10b
+timeCreated: 1501355148
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites: []
+    outline:
+    - - {x: -157, y: 128}
+      - {x: -157, y: -113}
+      - {x: -154, y: -128}
+      - {x: -133, y: -128}
+      - {x: -133, y: 107}
+      - {x: -135, y: 128}
+    - - {x: -94, y: 128}
+      - {x: -94, y: -127}
+      - {x: -89, y: -128}
+      - {x: -67, y: -128}
+      - {x: -67, y: 100}
+      - {x: -70, y: 128}
+    - - {x: 5, y: -66}
+      - {x: 5, y: -115}
+      - {x: 9, y: -128}
+      - {x: 23, y: -128}
+      - {x: 23, y: -66}
+    - - {x: 75, y: -88}
+      - {x: 71, y: -89}
+      - {x: 71, y: -122}
+      - {x: 74, y: -128}
+      - {x: 87, y: -128}
+      - {x: 87, y: -90}
+      - {x: 85, y: -88}
+    - - {x: 127, y: -108}
+      - {x: 124, y: -113}
+      - {x: 124, y: -116}
+      - {x: 125, y: -117}
+      - {x: 123, y: -118}
+      - {x: 124, y: -117}
+      - {x: 124, y: -115}
+      - {x: 120, y: -111}
+      - {x: 118, y: -111}
+      - {x: 114, y: -113}
+      - {x: 114, y: -125}
+      - {x: 116, y: -128}
+      - {x: 139, y: -128}
+      - {x: 139, y: -110}
+      - {x: 133, y: -108}
+    - - {x: 9, y: -3}
+      - {x: 4, y: -12}
+      - {x: 4, y: -42}
+      - {x: 8, y: -66}
+      - {x: 23, y: -66}
+      - {x: 23, y: -6}
+      - {x: 21, y: -3}
+    - - {x: 73, y: -3}
+      - {x: 69, y: -6}
+      - {x: 69, y: -66}
+      - {x: 88, y: -66}
+      - {x: 89, y: -61}
+      - {x: 89, y: -10}
+      - {x: 86, y: -3}
+    - - {x: 105, y: -25}
+      - {x: 105, y: -65}
+      - {x: 106, y: -66}
+      - {x: 121, y: -66}
+      - {x: 121, y: -27}
+      - {x: 120, y: -25}
+    - - {x: 20, y: 61}
+      - {x: 9, y: 61}
+      - {x: 5, y: 51}
+      - {x: 5, y: 12}
+      - {x: 8, y: -2}
+      - {x: 21, y: -2}
+      - {x: 24, y: -1}
+      - {x: 25, y: 8}
+      - {x: 25, y: 53}
+      - {x: 22, y: 59}
+    - - {x: 75, y: 61}
+      - {x: 69, y: 60}
+      - {x: 69, y: 16}
+      - {x: 72, y: -2}
+      - {x: 90, y: -2}
+      - {x: 90, y: 58}
+      - {x: 87, y: 61}
+    - - {x: 105, y: 39}
+      - {x: 105, y: -1}
+      - {x: 106, y: -2}
+      - {x: 121, y: -2}
+      - {x: 121, y: 37}
+      - {x: 120, y: 39}
+    - - {x: 8, y: 125}
+      - {x: 5, y: 123}
+      - {x: 5, y: 73}
+      - {x: 9, y: 62}
+      - {x: 21, y: 62}
+      - {x: 23, y: 63}
+      - {x: 23, y: 123}
+      - {x: 20, y: 125}
+    - - {x: 73, y: 125}
+      - {x: 70, y: 122}
+      - {x: 68, y: 108}
+      - {x: 68, y: 84}
+      - {x: 73, y: 62}
+      - {x: 85, y: 62}
+      - {x: 87, y: 63}
+      - {x: 87, y: 123}
+      - {x: 84, y: 125}
+    - - {x: 142, y: 104}
+      - {x: 137, y: 102}
+      - {x: 135, y: 98}
+      - {x: 135, y: 65}
+      - {x: 136, y: 62}
+      - {x: 149, y: 62}
+      - {x: 151, y: 63}
+      - {x: 151, y: 102}
+      - {x: 149, y: 104}
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

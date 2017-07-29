@@ -29,16 +29,17 @@ public class GameManager : MonoBehaviour {
 			this.maxY = maxY;
 			this.layerName = layerName;
 
-			nobodiesHolder = layer.transform;
 			nobodies.Clear();
 
 			for (int i=0; i<max; i++) {
-				GameObject nobody = nobodiesLib[Random.Range(0, nobodiesLib.Length)];
-
+				//addObj ("Hero", layer, nobodiesLib, minX, maxX, minY, maxY, 0, "Foreground", 1);
 				float myX = Random.Range(minX, maxX);
 				float myY = Random.Range(minY, maxY);
 				float scale = -myY;
 
+				//addObj ("Hero", layer, nobodiesLib, -1.56f, -1.56f, -0.68f ,-0.68f, scale, "Foreground", 1);
+
+				GameObject nobody = nobodiesLib[Random.Range(0, nobodiesLib.Length)];
 				GameObject instance = Instantiate(nobody, new Vector2(myX, myY), Quaternion.identity) as GameObject;
 				SpriteRenderer sprite = instance.GetComponent<SpriteRenderer> ();
 				sprite.sortingLayerName = this.layerName;
@@ -89,18 +90,22 @@ public class GameManager : MonoBehaviour {
 		GameObject[] lib, 
 		float minX, float maxX, 
 		float minY, float maxY, float scale, 
-		string layerName, int layerID
+		string layerName, int layerOrder,
+		bool flipX
 	) {
 		
 		GameObject obj = lib[Random.Range(0, lib.Length)];
 
 		float myX = Random.Range(minX, maxX);
 		float myY = Random.Range(minY, maxY);
-		if (scale==0) scale = -myY;
-
+	
 		GameObject instance = Instantiate(obj, new Vector2(myX, myY), Quaternion.identity) as GameObject;
 		SpriteRenderer sprite = instance.GetComponent<SpriteRenderer> ();
 		sprite.sortingLayerName = layerName;
+		sprite.sortingOrder = layerOrder;
+		sprite.flipX = flipX;
+		if (scale == 0) scale = -myY;
+
 		instance.transform.localScale = new Vector2 (scale, scale);
 		instance.transform.SetParent(parentObj.transform);
 	}
@@ -116,7 +121,8 @@ public class GameManager : MonoBehaviour {
 
 	void resetPlayers() {
 		GameObject playersLayer = new GameObject("Layers");
-		addObj ("Hero", playersLayer, humansLib, -1.56f, -1.56f, -0.68f ,-0.68f, 0, "Foreground", 1);
-		addObj ("Target", playersLayer, humansLib, -0.4f, -0.4f, -0.68f, -0.68f, 0, "Foreground", 1);
+		addObj ("Target", playersLayer, humansLib, -3.56f, -3.56f, -1.3f ,-1.3f, 0.85f, "SurfaceForeground", 1, false);
+		addObj ("Hero", playersLayer, humansLib, -2.6f, -2.6f, -1.3f, -1.3f, 0.85f, "SurfaceForeground", 1, true);
+
 	}
 }
