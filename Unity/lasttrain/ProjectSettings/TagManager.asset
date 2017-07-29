@@ -50,6 +50,9 @@ TagManager:
   - name: Foreground
     uniqueID: 423997429
     locked: 0
-  - name: FirstPlane
+  - name: SurfaceForeground
     uniqueID: 2035695113
+    locked: 0
+  - name: First
+    uniqueID: 1623225839
     locked: 0
