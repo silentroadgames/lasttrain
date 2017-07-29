@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using MalagaJam.LastTrain;
 
 public class GameManager : MonoBehaviour {
 
@@ -84,7 +85,7 @@ public class GameManager : MonoBehaviour {
 		
 	}
 
-	public void addObj(
+	public GameObject addObj(
 		string name, 
 		GameObject parentObj, 
 		GameObject[] lib, 
@@ -108,6 +109,8 @@ public class GameManager : MonoBehaviour {
 
 		instance.transform.localScale = new Vector2 (scale, scale);
 		instance.transform.SetParent(parentObj.transform);
+
+		return instance;
 	}
 
 	void resetNobodies() {
@@ -121,8 +124,11 @@ public class GameManager : MonoBehaviour {
 
 	void resetPlayers() {
 		GameObject playersLayer = new GameObject("Layers");
-		addObj ("Target", playersLayer, humansLib, -3.56f, -3.56f, -1.3f ,-1.3f, 0.85f, "SurfaceForeground", 1, false);
-		addObj ("Hero", playersLayer, humansLib, -2.6f, -2.6f, -1.3f, -1.3f, 0.85f, "SurfaceForeground", 1, true);
+		GameObject target = addObj ("Target", playersLayer, humansLib, -3.56f, -3.56f, -1.3f ,-1.3f, 0.85f, "SurfaceForeground", 1, false);
+		GameObject hero = addObj ("Hero", playersLayer, humansLib, -2.6f, -2.6f, -1.3f, -1.3f, 0.85f, "SurfaceForeground", 1, true);
 
+		HumanBehaviour targetHB = target.GetComponent<HumanBehaviour> () as HumanBehaviour;
+
+		targetHB.checkReaction (Feelings.Joy);
 	}
 }

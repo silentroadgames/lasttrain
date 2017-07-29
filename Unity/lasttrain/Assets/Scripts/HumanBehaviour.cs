@@ -30,7 +30,7 @@ namespace MalagaJam.LastTrain
 	}
 
 	// Every human reacts in a predictive way to an emotion.
-	public class BasicReactions : MonoBehaviour
+	public class BasicReactions
 	{
 		public Emotion baseJoy 			= new Emotion(1, -1, -1, -1, -1);
 		public Emotion baseFear 		= new Emotion(1, 1, -1, -1, -1);
@@ -43,27 +43,29 @@ namespace MalagaJam.LastTrain
 	/// <summary>
 	/// Every instance is a CPU player we can interact with.
 	/// </summary>
-	public class Human : BasicReactions {
+	public class HumanBehaviour : MonoBehaviour {
 
 		#region FIELDS
-		public int joy;
-		public int fear;
-		public int sadness;
-		public int contempt;
-		public int fury;
+		[Range(1, 100)]public int joy;
+		[Range(1, 100)]public int fear;
+		[Range(1, 100)]public int sadness;
+		[Range(1, 100)]public int contempt;
+		[Range(1, 100)]public int fury;
 		public int turn;                // ronda actual.
-		public int nDoomed;             // 100 significa totalmente gris.
+		[Range(1, 100)]public int nDoomed;             // 100 significa totalmente gris.
 		public Feelings currentFeeling; // Emoción que está sintiendo el humano.
+		public BasicReactions br;       // An human has basic reactions
 		#endregion
 
 		#region CONSTRUCTORS
-		public Human(int jo, int fe, int sa, int co, int fu)
+		public HumanBehaviour(int jo, int fe, int sa, int co, int fu)
 		{
 			// 1) Randomizar la primera emocion del humano
 			System.Random rnd = new System.Random();
 			currentFeeling = (Feelings)rnd.Next(0, 4);
 
 			// 2) Gestionar parametros
+			br = new BasicReactions();
 			joy = jo;
 			fear = fe;
 			sadness = sa;
@@ -78,121 +80,121 @@ namespace MalagaJam.LastTrain
 		/// e incrementa una emocion basandonos en la tabla.
 		/// </summary>
 		/// <returns>void.</returns>
-		void checkReaction (Feelings playerEmotion) {
+		public void checkReaction (Feelings playerEmotion) {
 
 			switch (playerEmotion.ToString())
 			{
 			case "Joy":
 				switch (currentFeeling.ToString ()) {
 				case "Joy":
-					joy += baseJoy.Joy;
+					joy += br.baseJoy.Joy;
 					break;
 				case "Fear":
-					fear += baseJoy.Fear;
+					fear += br.baseJoy.Fear;
 					break;
 				case "Sadness":
-					sadness += baseJoy.Sadness;
+					sadness += br.baseJoy.Sadness;
 					break;
 				case "Contempt":
-					contempt += baseJoy.Contempt;
+					contempt += br.baseJoy.Contempt;
 					break;
 				case "Fury":
-					fury += baseJoy.Fury;
+					fury += br.baseJoy.Fury;
 					break;
 				}
 				break;
 			case "Fear":
 				switch (currentFeeling.ToString ()) {
 				case "Joy":
-					joy += baseFear.Joy;
+					joy += br.baseFear.Joy;
 					break;
 				case "Fear":
-					fear += baseFear.Fear;
+					fear += br.baseFear.Fear;
 					break;
 				case "Sadness":
-					sadness += baseFear.Sadness;
+					sadness += br.baseFear.Sadness;
 					break;
 				case "Contempt":
-					contempt += baseFear.Contempt;
+					contempt += br.baseFear.Contempt;
 					break;
 				case "Fury":
-					fury += baseFear.Fury;
+					fury += br.baseFear.Fury;
 					break;
 				}
 				break;
 			case "Sadness":
 				switch (currentFeeling.ToString ()) {
 				case "Joy":
-					joy += baseSadness.Joy;
+					joy += br.baseSadness.Joy;
 					break;
 				case "Fear":
-					fear += baseSadness.Fear;
+					fear += br.baseSadness.Fear;
 					break;
 				case "Sadness":
-					sadness += baseSadness.Sadness;
+					sadness += br.baseSadness.Sadness;
 					break;
 				case "Contempt":
-					contempt += baseSadness.Contempt;
+					contempt += br.baseSadness.Contempt;
 					break;
 				case "Fury":
-					fury += baseSadness.Fury;
+					fury += br.baseSadness.Fury;
 					break;
 				}
 				break;
 			case "Contempt":
 				switch (currentFeeling.ToString ()) {
 				case "Joy":
-					joy += baseContempt.Joy;
+					joy += br.baseContempt.Joy;
 					break;
 				case "Fear":
-					fear += baseContempt.Fear;
+					fear += br.baseContempt.Fear;
 					break;
 				case "Sadness":
-					sadness += baseContempt.Sadness;
+					sadness += br.baseContempt.Sadness;
 					break;
 				case "Contempt":
-					contempt += baseContempt.Contempt;
+					contempt += br.baseContempt.Contempt;
 					break;
 				case "Fury":
-					fury += baseContempt.Fury;
+					fury += br.baseContempt.Fury;
 					break;
 				}
 				break;
 			case "Fury":
 				switch (currentFeeling.ToString ()) {
 				case "Joy":
-					joy += baseJoy.Joy;
+					joy += br.baseJoy.Joy;
 					break;
 				case "Fear":
-					fear += baseJoy.Fear;
+					fear += br.baseJoy.Fear;
 					break;
 				case "Sadness":
-					sadness += baseJoy.Sadness;
+					sadness += br.baseJoy.Sadness;
 					break;
 				case "Contempt":
-					contempt += baseJoy.Contempt;
+					contempt += br.baseJoy.Contempt;
 					break;
 				case "Fury":
-					fury += baseJoy.Fury;
+					fury += br.baseJoy.Fury;
 					break;
 				}
 				break;
 			case "Silence":
 				switch (currentFeeling.ToString ()) {
 				case "Joy":
-					joy += baseSilence.Joy;
+					joy += br.baseSilence.Joy;
 					break;
 				case "Fear":
-					fear += baseSilence.Fear;
+					fear += br.baseSilence.Fear;
 					break;
 				case "Sadness":
-					sadness += baseSilence.Sadness;
+					sadness += br.baseSilence.Sadness;
 					break;
 				case "Contempt":
-					contempt += baseSilence.Contempt;
+					contempt += br.baseSilence.Contempt;
 					break;
 				case "Fury":
-					fury += baseSilence.Fury;
+					fury += br.baseSilence.Fury;
 					break;
 				}
 				break;
@@ -212,16 +214,16 @@ namespace MalagaJam.LastTrain
 		/// Muestra la GUI de reiniciar.
 		/// </summary>
 		void triggerTryAgainGUI () {
-				Debug.Log ("TODO: Crear GUI de Reiniciar.");
+			Debug.Log ("TODO: Crear GUI de Reiniciar.");
 		}
 		#endregion
 
 		#region GAME LOOP
 		// Usa esto para inicializar
 		void Start () {
-			
+
 		}
-		
+
 		// Se llama Update una vez por frame.
 		void Update () {
 			this.updateDoomedValue ();
