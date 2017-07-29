@@ -56,6 +56,11 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager instance = null;
 	public 	GameObject[] nobodiesLib;
+	public 	GameObject[] humansLib;
+	public 	GameObject[] emotionsLib;
+	public 	GameObject[] iconsLib;
+	public GameObject bubble;
+	public GameObject playerLayer;
 
 	private List<GameObject> nobodies = new List<GameObject>();
 
@@ -70,11 +75,34 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		resetNobodies ();
+		resetPlayers ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void addObj(
+		string name, 
+		GameObject parentObj, 
+		GameObject[] lib, 
+		float minX, float maxX, 
+		float minY, float maxY, float scale, 
+		string layerName, int layerID
+	) {
+		
+		GameObject obj = lib[Random.Range(0, lib.Length)];
+
+		float myX = Random.Range(minX, maxX);
+		float myY = Random.Range(minY, maxY);
+		if (scale==0) scale = -myY;
+
+		GameObject instance = Instantiate(obj, new Vector2(myX, myY), Quaternion.identity) as GameObject;
+		SpriteRenderer sprite = instance.GetComponent<SpriteRenderer> ();
+		sprite.sortingLayerName = layerName;
+		instance.transform.localScale = new Vector2 (scale, scale);
+		instance.transform.SetParent(parentObj.transform);
 	}
 
 	void resetNobodies() {
@@ -83,5 +111,12 @@ public class GameManager : MonoBehaviour {
 		groupA.init(nobodiesLayer, nobodies, nobodiesLib, 20, 25, -4.5f, -0.5f, -0.72f, -0.85f, "Background");
 		groupB.init(nobodiesLayer, nobodies, nobodiesLib, 20, 25, -2.0f, -0.5f, -0.85f, -2f, "First");
 		//groupC.init(nobodiesLayer, nobodies, nobodiesLib, 0, 10, -4.5f, -0.5f, -1.5f, -2f, "First");
+
+	}
+
+	void resetPlayers() {
+		GameObject playersLayer = new GameObject("Layers");
+		addObj ("Hero", playersLayer, humansLib, -1.56f, -1.56f, -0.68f ,-0.68f, 0, "Foreground", 1);
+		addObj ("Target", playersLayer, humansLib, -0.4f, -0.4f, -0.68f, -0.68f, 0, "Foreground", 1);
 	}
 }
