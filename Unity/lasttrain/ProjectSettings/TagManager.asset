@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: FirstPlane
+    uniqueID: 2035695113
+    locked: 0
+  - name: Foreground
+    uniqueID: 423997429
+    locked: 0
+  - name: Background
+    uniqueID: 1017934615
+    locked: 0
+  - name: DeepBackground
+    uniqueID: 2301705403
+    locked: 0
