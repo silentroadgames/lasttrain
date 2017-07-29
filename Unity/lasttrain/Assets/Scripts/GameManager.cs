@@ -6,6 +6,10 @@ public class GameManager : MonoBehaviour {
 
 	const string version = "0.0.1";
 
+	public static GameManager instance = null;
+
+
+
 	void Awake () {
 		Debug.Log("Last Train - version: " + version);
 	}
