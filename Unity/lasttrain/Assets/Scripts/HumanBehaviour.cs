@@ -21,9 +21,8 @@ namespace MalagaJam.LastTrain
 		public int Fury;
 		public int Silence;
 
-		public Emotion(int joy, int fear, int sadness, int contempt, int fury)
+		public Emotion(int fear, int sadness, int contempt, int fury)
 		{
-			Joy = joy;
 			Fear = fear;
 			Sadness = sadness;
 			Contempt = contempt;
@@ -34,12 +33,11 @@ namespace MalagaJam.LastTrain
 	// Every human reacts in a predictive way to an emotion.
 	public class BasicReactions
 	{
-		public Emotion baseJoy 			= new Emotion(1, -1, -1, -1, -1);
-		public Emotion baseFear 		= new Emotion(1, 1, -1, -1, -1);
-		public Emotion baseSadness 		= new Emotion(1, -1, 1, -1, -1);
-		public Emotion baseContempt 	= new Emotion(1, -1, -1, 1, -1);
-		public Emotion baseFury 		= new Emotion(-1, 1, 1, 1, 1);
-		public Emotion baseSilence 		= new Emotion(1, -1, 1, -1, -1);
+		public Emotion baseFear 		= new Emotion(1, -1, -1, -1);
+		public Emotion baseSadness 		= new Emotion(-1, 1, -1, -1);
+		public Emotion baseContempt 	= new Emotion(-1, -1, 1, -1);
+		public Emotion baseFury 		= new Emotion(1, 1, 1, 1);
+		public Emotion baseSilence 		= new Emotion(-1, 1, -1, -1);
 	}
 
 	/// <summary>
@@ -48,16 +46,20 @@ namespace MalagaJam.LastTrain
 	public class HumanBehaviour : MonoBehaviour {
 
 		#region FIELDS
-		[Range(1, 100)]public int joy;
-		[Range(1, 100)]public int fear;
-		[Range(1, 100)]public int sadness;
-		[Range(1, 100)]public int contempt;
-		[Range(1, 100)]public int fury;
+		public const int MAX_EMOTION_VALUE = 6;
+		public const float EMOTION_DELAY = 2.0f;
+
+		public int joy = 3;
 		public int turn;                // ronda actual.
+
+		[Range(1, MAX_EMOTION_VALUE)]public int fear;
+		[Range(1, MAX_EMOTION_VALUE)]public int sadness;
+		[Range(1, MAX_EMOTION_VALUE)]public int contempt;
+		[Range(1, MAX_EMOTION_VALUE)]public int fury;
 		[Range(1, 100)]public int nDoomed;             // 100 significa totalmente gris.
 		public BasicReactions br;       // An human has basic reactions
 
-		string[] feelings = new string[] {"Joy", "Fear", "Sadness", "Contempt", "Fury", "Silence"};
+		string[] feelings = new string[] {"Fear", "Sadness", "Contempt", "Fury"};
 		public string currentFeeling;
 
 		#endregion
@@ -76,35 +78,22 @@ namespace MalagaJam.LastTrain
 		/// e incrementa una emocion basandonos en la tabla.
 		/// </summary>
 		/// <returns>void.</returns>
-		public void checkReaction (string emotion) {
+		/// 
+		/// StartCoroutine(
+		/// 
+		/// 
+	
+		public void delayCheckReaction (string emotion) {
+			Debug.Log ("delayCheckReaction " + emotion + " - "+joy+","+fear+","+sadness+","+contempt+","+fury );
+			StartCoroutine (checkReaction(emotion));
+		}
 
-			Debug.Log ("checkReaction " + emotion);
-			
+		public IEnumerator checkReaction (string emotion) {
+			Debug.Log ("checkReaction " + emotion + " - "+joy+","+fear+","+sadness+","+contempt+","+fury );
+
 			switch (emotion) {
-			case "Joy":
-				switch (currentFeeling) {
-				case "Joy":
-					joy += br.baseJoy.Joy;
-					break;
-				case "Fear":
-					fear += br.baseJoy.Fear;
-					break;
-				case "Sadness":
-					sadness += br.baseJoy.Sadness;
-					break;
-				case "Contempt":
-					contempt += br.baseJoy.Contempt;
-					break;
-				case "Fury":
-					fury += br.baseJoy.Fury;
-					break;
-				}
-				break;
 			case "Fear":
 				switch (currentFeeling) {
-				case "Joy":
-					joy += br.baseFear.Joy;
-					break;
 				case "Fear":
 					fear += br.baseFear.Fear;
 					break;
@@ -121,9 +110,6 @@ namespace MalagaJam.LastTrain
 				break;
 			case "Sadness":
 				switch (currentFeeling) {
-				case "Joy":
-					joy += br.baseSadness.Joy;
-					break;
 				case "Fear":
 					fear += br.baseSadness.Fear;
 					break;
@@ -140,9 +126,6 @@ namespace MalagaJam.LastTrain
 				break;
 			case "Contempt":
 				switch (currentFeeling) {
-				case "Joy":
-					joy += br.baseContempt.Joy;
-					break;
 				case "Fear":
 					fear += br.baseContempt.Fear;
 					break;
@@ -159,20 +142,17 @@ namespace MalagaJam.LastTrain
 				break;
 			case "Fury":
 				switch (currentFeeling) {
-				case "Joy":
-					joy += br.baseJoy.Joy;
-					break;
 				case "Fear":
-					fear += br.baseJoy.Fear;
+					fear += br.baseFury.Fear;
 					break;
 				case "Sadness":
-					sadness += br.baseJoy.Sadness;
+					sadness += br.baseFury.Sadness;
 					break;
 				case "Contempt":
-					contempt += br.baseJoy.Contempt;
+					contempt += br.baseFury.Contempt;
 					break;
 				case "Fury":
-					fury += br.baseJoy.Fury;
+					fury += br.baseFury.Fury;
 					break;
 				}
 				break;
@@ -196,6 +176,38 @@ namespace MalagaJam.LastTrain
 				}
 				break;
 			}
+
+			if (fear > MAX_EMOTION_VALUE) {
+				fear = MAX_EMOTION_VALUE;
+			}
+			if (contempt > MAX_EMOTION_VALUE) {
+				contempt = MAX_EMOTION_VALUE;
+			}
+			if (fury > MAX_EMOTION_VALUE) {
+				fury = MAX_EMOTION_VALUE;
+			}
+			if (sadness > MAX_EMOTION_VALUE) {
+				sadness = MAX_EMOTION_VALUE;
+			}
+
+			if (fear < 0) {
+				fear = 0;
+			}
+			if (contempt < 0) {
+				contempt = 0;
+			}
+			if (fury < 0) {
+				fury = 0;
+			}
+			if (sadness < 0) {
+				sadness = 0;
+			}
+			Debug.Log ("checkReaction " + emotion + " - "+joy+","+fear+","+sadness+","+contempt+","+fury );
+			yield return new WaitForSeconds(EMOTION_DELAY);
+			GameManager gameB = GameManager.instance.GetComponent<GameManager> ();
+			gameB.nextEmotion();
+			yield return null;
+
 		}
 		#endregion
 

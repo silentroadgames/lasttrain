@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour {
 	public 	GameObject[] iconsLib;
 	public GameObject bubble;
 	public GameObject playerLayer;
+	public GameObject reactionClicked;
+	public GameObject selectedDialog;
 
 	public GameObject hero, target, targetBubble, heroBubble;
 
@@ -166,7 +168,7 @@ public class GameManager : MonoBehaviour {
 	void resetPlayers() {
 		GameObject playersLayer = new GameObject("Layers");
 		target = addObjFromLib ("Target", playersLayer, humansLib, -2.6f, -2.6f, -1.3f ,-1.3f, 0.85f, "SurfaceForeground", 1, true);
-		targetBubble = addObjFromPrefab ("TargetBubble", playersLayer, bubble, -2.8f, -2.8f, -0.85f ,-0.85f, 0.85f, "SurfaceForeground", 1, true);
+		//targetBubble = addObjFromPrefab ("TargetBubble", playersLayer, bubble, -2.8f, -2.8f, -0.85f ,-0.85f, 0.85f, "SurfaceForeground", 1, true);
 
 		hero = addObjFromLib ("Hero", playersLayer, humansLib, -3.86f, -3.86f, -1.3f, -1.3f, 0.85f, "SurfaceForeground", 1, false);
 		heroBubble = addObjFromPrefab ("HeroBubble", playersLayer, bubble, -3.86f, -3.86f, -0.85f, -0.85f, 0.85f, "SurfaceForeground", 1, false);
@@ -177,21 +179,45 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void resetEmotions() {
-		GameObject obj, emo;
+		string feeling;
+		GameObject obj;
 		GameObject playersLayer = new GameObject("Layers");
 
+		Debug.Log ("resetEmotions");
+		/*
 		for( int i = 0; i < targetBubble.transform.childCount; ++i ) {
-			obj = targetBubble.transform.GetChild (i).gameObject;
+			//obj = targetBubble.transform.GetChild (i).gameObject;
 			//if (target.GetComponent<HumanBehaviour> ().currentFeeling != obj.name) {
-				obj.SetActive (false);
+			//	obj.SetActive (false);
 			//} else {
 			//	obj.transform.position = new Vector2 (-2.8f, -0.83f);
 			//}
 		}
+		*/
+		if (selectedDialog != null) {
+			Destroy (selectedDialog);
+		}
+		feeling = target.GetComponent<HumanBehaviour> ().currentFeeling;
+		obj = getEmotionFromDialog(feeling);			
+		selectedDialog = addObjFromPrefab ("Emo", playersLayer, obj, -2.8f, -2.8f, -0.85f ,-0.85f, 0.85f, "First", 1, true);
 
-		emo = addObjFromLib ("Emo", playersLayer, dialogsLib, -2.8f, -2.8f, -0.85f ,-0.85f, 0.85f, "SurfaceForeground", 1, false);
+	}
 
+	public GameObject getEmotionFromDialog(string dialog) {
+		string pos = Random.Range (0, 4).ToString();
 
+		foreach (GameObject d in dialogsLib) {
+			if (d.name == dialog + pos) {
+				return d;
+			}
+		}
 
+		return null;
+	}
+
+	public void nextEmotion() {
+		Reaction reaction = reactionClicked.GetComponent<Reaction> ();
+		reaction.resetPos ();
+		resetEmotions();
 	}
 }
