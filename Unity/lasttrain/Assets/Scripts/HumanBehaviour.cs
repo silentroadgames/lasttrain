@@ -52,7 +52,7 @@ namespace MalagaJam.LastTrain
 		public Vector2 initialPosition;
 
 		public int turn;                // ronda actual.
-		public float health;
+		public float health, previousHealth;
 
 		public float fear, sadness, contempt, fury;
 		[Range(1, 100)]public int nDoomed;             // 100 significa totalmente gris.

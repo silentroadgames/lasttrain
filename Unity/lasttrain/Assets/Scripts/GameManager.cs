@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
 		private Transform nobodiesHolder;
 		private SpriteRenderer sprite;
 
+		public AudioClip audioOK, audioKO;
+
 		public void init(
 			GameObject layer, 
 			List<SpriteRenderer> nobodies, 
