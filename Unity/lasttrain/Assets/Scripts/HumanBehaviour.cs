@@ -210,8 +210,12 @@ namespace MalagaJam.LastTrain
 			sprite.color = new Color (health, health, health, 1.0f);
 
 			if (!hero) {
-				sprite.transform.position = new Vector2 (0.5f + initialPosition.x - (1.0f * health), initialPosition.y);
-				dialogSprite.transform.position = new Vector2 (0.65f + initialPosition.x - (1.0f * health), initialPosition.y + 0.4f);
+				if (health > 0) {
+					sprite.transform.position = new Vector2 (0.5f + initialPosition.x - (1.0f * health), initialPosition.y);
+					dialogSprite.transform.position = new Vector2 (0.65f + initialPosition.x - (1.0f * health), initialPosition.y + 0.4f);
+				} else {
+					gameB.nextScene ();
+				}
 
 			}
 		}
@@ -230,22 +234,6 @@ namespace MalagaJam.LastTrain
 
 			yield return null;
 
-		}
-		#endregion
-
-		#region EVENTS
-		/// <summary>
-		/// Se actualiza el valor  alpha de la textura en el game loop.
-		/// </summary>
-		void updateDoomedValue () {
-			//nDoomed = ((fear + sadness + contempt + fury) / 5);
-		}
-
-		/// <summary>
-		/// Muestra la GUI de reiniciar.
-		/// </summary>
-		void triggerTryAgainGUI () {
-			//Debug.Log ("TODO: Crear GUI de Reiniciar.");
 		}
 		#endregion
 
@@ -273,14 +261,6 @@ namespace MalagaJam.LastTrain
 
 			initialPosition = this.transform.position;
 			updateHealth (hero);
-		}
-
-		// Se llama Update una vez por frame.
-		void Update () {
-			this.updateDoomedValue ();
-			if (this.nDoomed != 100) {
-				triggerTryAgainGUI();
-			};
 		}
 		#endregion
 	}

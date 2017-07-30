@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 
 		public void init(
 			GameObject layer, 
-			List<GameObject> nobodies, 
+			List<SpriteRenderer> nobodies, 
 			GameObject[] nobodiesLib, 
 			int min, int max, 
 			float minX, float maxX, 
@@ -30,7 +30,9 @@ public class GameManager : MonoBehaviour {
 			this.maxY = maxY;
 			this.layerName = layerName;
 
-			nobodies.Clear();
+			foreach(SpriteRenderer nobody in nobodies) {
+				Destroy(nobody);
+			}
 
 			for (int i=0; i<max; i++) {
 				//addObj ("Hero", layer, nobodiesLib, minX, maxX, minY, maxY, 0, "Foreground", 1);
@@ -44,6 +46,9 @@ public class GameManager : MonoBehaviour {
 				GameObject instance = Instantiate(nobody, new Vector2(myX, myY), Quaternion.identity) as GameObject;
 				SpriteRenderer sprite = instance.GetComponent<SpriteRenderer> ();
 				sprite.sortingLayerName = this.layerName;
+
+				nobodies.Add(sprite);
+
 				instance.transform.localScale = new Vector2 (scale, scale);
 				instance.transform.SetParent(nobodiesHolder);
 			}
@@ -70,7 +75,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject hero, target, targetBubble, heroBubble;
 
 
-	private List<GameObject> nobodies = new List<GameObject>();
+	private List<SpriteRenderer> nobodies = new List<SpriteRenderer>();
 
 	NobodiesGroup groupA = new NobodiesGroup();
 	NobodiesGroup groupB = new NobodiesGroup();
@@ -94,8 +99,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		resetNobodies ();
-		resetPlayers ();
+		nextScene ();
 	}
 	
 	// Update is called once per frame
@@ -162,11 +166,18 @@ public class GameManager : MonoBehaviour {
 		groupA.init(nobodiesLayer, nobodies, nobodiesLib, 20, 25, -4.5f, -0.5f, -0.72f, -0.85f, "Background");
 		groupB.init(nobodiesLayer, nobodies, nobodiesLib, 20, 25, -2.0f, -0.5f, -0.85f, -2f, "First");
 		//groupC.init(nobodiesLayer, nobodies, nobodiesLib, 0, 10, -4.5f, -0.5f, -1.5f, -2f, "First");
-
 	}
 
 	void resetPlayers() {
 		GameObject playersLayer = new GameObject("Layers");
+
+		if (target)
+			Destroy (target);
+		if (hero)
+			Destroy (hero);
+		if (heroBubble)
+			Destroy (heroBubble);
+		
 		target = addObjFromLib ("Target", playersLayer, humansLib, -2.6f, -2.6f, -1.1f ,-1.1f, 0.85f, "SurfaceForeground", 1, true);
 		//targetBubble = addObjFromPrefab ("TargetBubble", playersLayer, bubble, -2.8f, -2.8f, -0.85f ,-0.85f, 0.85f, "SurfaceForeground", 1, true);
 
@@ -219,5 +230,10 @@ public class GameManager : MonoBehaviour {
 		Reaction reaction = reactionClicked.GetComponent<Reaction> ();
 		reaction.resetPos ();
 		resetEmotions();
+	}
+
+	public void nextScene() {
+		resetNobodies ();
+		resetPlayers ();
 	}
 }
