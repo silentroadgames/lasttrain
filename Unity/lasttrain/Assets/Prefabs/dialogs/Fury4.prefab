@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4563566191142162}
   - component: {fileID: 212619592826776630}
   m_Layer: 0
-  m_Name: "nin\u0303o gritando"
+  m_Name: Fury4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4920793801335484}
   - component: {fileID: 212071016622310080}
   m_Layer: 0
-  m_Name: soledad
+  m_Name: Fear4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

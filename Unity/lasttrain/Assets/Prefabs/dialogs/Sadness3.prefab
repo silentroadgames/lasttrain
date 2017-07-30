@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4120402340573300}
   - component: {fileID: 212650202545123716}
   m_Layer: 0
-  m_Name: ruptura
+  m_Name: Sadness3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

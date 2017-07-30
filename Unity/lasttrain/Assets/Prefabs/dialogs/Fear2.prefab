@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4417782580279242}
   - component: {fileID: 212560747933236228}
   m_Layer: 0
-  m_Name: tumba
+  m_Name: Fear2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

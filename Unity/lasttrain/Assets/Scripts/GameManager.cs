@@ -167,11 +167,11 @@ public class GameManager : MonoBehaviour {
 
 	void resetPlayers() {
 		GameObject playersLayer = new GameObject("Layers");
-		target = addObjFromLib ("Target", playersLayer, humansLib, -2.6f, -2.6f, -1.3f ,-1.3f, 0.85f, "SurfaceForeground", 1, true);
+		target = addObjFromLib ("Target", playersLayer, humansLib, -2.6f, -2.6f, -1.1f ,-1.1f, 0.85f, "SurfaceForeground", 1, true);
 		//targetBubble = addObjFromPrefab ("TargetBubble", playersLayer, bubble, -2.8f, -2.8f, -0.85f ,-0.85f, 0.85f, "SurfaceForeground", 1, true);
 
-		hero = addObjFromLib ("Hero", playersLayer, humansLib, -3.86f, -3.86f, -1.3f, -1.3f, 0.85f, "SurfaceForeground", 1, false);
-		heroBubble = addObjFromPrefab ("HeroBubble", playersLayer, bubble, -3.86f, -3.86f, -0.85f, -0.85f, 0.85f, "SurfaceForeground", 1, false);
+		hero = addObjFromLib ("Hero", playersLayer, humansLib, -3.86f, -3.86f, -1.1f, -1.1f, 0.85f, "SurfaceForeground", 1, false);
+		heroBubble = addObjFromPrefab ("HeroBubble", playersLayer, bubble, -3.91f, -3.91f, -0.65f, -0.65f, 0.85f, "SurfaceForeground", 1, false);
 		//HumanBehaviour targetHB = target.GetComponent<HumanBehaviour> () as HumanBehaviour;
 
 		resetEmotions ();
@@ -179,10 +179,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void resetEmotions() {
-		string feeling;
 		GameObject obj;
 		GameObject playersLayer = new GameObject("Layers");
-
+		string feeling;
 		Debug.Log ("resetEmotions");
 		/*
 		for( int i = 0; i < targetBubble.transform.childCount; ++i ) {
@@ -198,8 +197,9 @@ public class GameManager : MonoBehaviour {
 			Destroy (selectedDialog);
 		}
 		feeling = target.GetComponent<HumanBehaviour> ().currentFeeling;
+		Debug.Log ("nextFeeling to " + feeling);
 		obj = getEmotionFromDialog(feeling);			
-		selectedDialog = addObjFromPrefab ("Emo", playersLayer, obj, -2.8f, -2.8f, -0.85f ,-0.85f, 0.85f, "First", 1, true);
+		selectedDialog = addObjFromPrefab ("Emo", playersLayer, obj, -2.39f, -2.39f, -0.65f ,-0.5f, 0.85f, "First", 1, false);
 
 	}
 
@@ -215,7 +215,7 @@ public class GameManager : MonoBehaviour {
 		return null;
 	}
 
-	public void nextEmotion() {
+	public void nextFeeling(string emotion) {
 		Reaction reaction = reactionClicked.GetComponent<Reaction> ();
 		reaction.resetPos ();
 		resetEmotions();

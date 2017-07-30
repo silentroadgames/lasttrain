@@ -19,11 +19,11 @@ public class Reaction : MonoBehaviour {
 	void OnMouseDown()
 	{
 		GameManager.instance.reactionClicked = GameObject.Find(this.name);
-		HumanBehaviour heroB = GameManager.instance.hero.GetComponent<HumanBehaviour> ();
-		heroB.delayCheckReaction(this.name);
+		HumanBehaviour targetB = GameManager.instance.target.GetComponent<HumanBehaviour> ();
+		targetB.checkReaction(this.name);
 
 		//this.transform.position = GameManager.instance.heroBubble.transform.position;
-		this.transform.position = new Vector2(-3.86f, -0.83f);
+		this.transform.position = new Vector2(-3.91f, -0.63f);
 	}
 
 	public void resetPos() {

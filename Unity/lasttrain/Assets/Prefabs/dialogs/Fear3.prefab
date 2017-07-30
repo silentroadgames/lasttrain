@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4455248472808056}
   - component: {fileID: 212905192220673894}
   m_Layer: 0
-  m_Name: mutilacion
+  m_Name: Fear3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

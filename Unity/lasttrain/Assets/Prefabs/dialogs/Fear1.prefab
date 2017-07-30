@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4386315404005006}
   - component: {fileID: 212655718771964088}
   m_Layer: 0
-  m_Name: fracaso
+  m_Name: Fear1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
