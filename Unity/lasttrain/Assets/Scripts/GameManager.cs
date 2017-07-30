@@ -30,10 +30,6 @@ public class GameManager : MonoBehaviour {
 			this.maxY = maxY;
 			this.layerName = layerName;
 
-			foreach(SpriteRenderer nobody in nobodies) {
-				Destroy(nobody);
-			}
-
 			for (int i=0; i<max; i++) {
 				//addObj ("Hero", layer, nobodiesLib, minX, maxX, minY, maxY, 0, "Foreground", 1);
 				float myX = Random.Range(minX, maxX);
@@ -163,9 +159,14 @@ public class GameManager : MonoBehaviour {
 	void resetNobodies() {
 		GameObject nobodiesLayer = new GameObject("Nobodies");
 		//(min, max, minX, maxX, minY, maxY, sortingLayerName)
-		groupA.init(nobodiesLayer, nobodies, nobodiesLib, 20, 25, -4.5f, -0.5f, -0.72f, -0.85f, "Background");
+
+		foreach(SpriteRenderer nobody in nobodies) {
+			Destroy(nobody);
+		}
+
+		groupA.init(nobodiesLayer, nobodies, nobodiesLib, 20, 25, -4.5f, -0.5f, -0.85f, -1.0f, "SurfaceForeground");
 		groupB.init(nobodiesLayer, nobodies, nobodiesLib, 20, 25, -2.0f, -0.5f, -0.85f, -2f, "First");
-		//groupC.init(nobodiesLayer, nobodies, nobodiesLib, 0, 10, -4.5f, -0.5f, -1.5f, -2f, "First");
+		groupC.init(nobodiesLayer, nobodies, nobodiesLib, 0, 10, -4.5f, -0.5f, -1.5f, -2f, "First");
 	}
 
 	void resetPlayers() {
