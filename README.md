@@ -5,7 +5,7 @@
 - Alberto Bodero
 
 ### DEV
-- Adrián López
+- Adrián López (@zeioth)
 - Alberto Pérez-Bermejo (@pixeliko)
 - Eduardo Pérez-Bermejo (@ifedu)
 
