@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 using System;
 
 namespace MalagaJam.LastTrain
@@ -53,24 +55,18 @@ namespace MalagaJam.LastTrain
 		[Range(1, 100)]public int fury;
 		public int turn;                // ronda actual.
 		[Range(1, 100)]public int nDoomed;             // 100 significa totalmente gris.
-		public Feelings currentFeeling; // Emoción que está sintiendo el humano.
 		public BasicReactions br;       // An human has basic reactions
+
+		string[] feelings = new string[] {"Joy", "Fear", "Sadness", "Contempt", "Fury", "Silence"};
+		public string currentFeeling;
+
 		#endregion
 
 		#region CONSTRUCTORS
-		public HumanBehaviour(int jo, int fe, int sa, int co, int fu)
+		public HumanBehaviour()
 		{
-			// 1) Randomizar la primera emocion del humano
-			System.Random rnd = new System.Random();
-			currentFeeling = (Feelings)rnd.Next(0, 4);
-
 			// 2) Gestionar parametros
 			br = new BasicReactions();
-			joy = jo;
-			fear = fe;
-			sadness = sa;
-			contempt = co;
-			fury = fu;
 		}
 		#endregion
 
@@ -80,12 +76,13 @@ namespace MalagaJam.LastTrain
 		/// e incrementa una emocion basandonos en la tabla.
 		/// </summary>
 		/// <returns>void.</returns>
-		public void checkReaction (Feelings playerEmotion) {
+		public void checkReaction (string emotion) {
 
-			switch (playerEmotion.ToString())
-			{
+			Debug.Log ("checkReaction " + emotion);
+			
+			switch (emotion) {
 			case "Joy":
-				switch (currentFeeling.ToString ()) {
+				switch (currentFeeling) {
 				case "Joy":
 					joy += br.baseJoy.Joy;
 					break;
@@ -104,7 +101,7 @@ namespace MalagaJam.LastTrain
 				}
 				break;
 			case "Fear":
-				switch (currentFeeling.ToString ()) {
+				switch (currentFeeling) {
 				case "Joy":
 					joy += br.baseFear.Joy;
 					break;
@@ -123,7 +120,7 @@ namespace MalagaJam.LastTrain
 				}
 				break;
 			case "Sadness":
-				switch (currentFeeling.ToString ()) {
+				switch (currentFeeling) {
 				case "Joy":
 					joy += br.baseSadness.Joy;
 					break;
@@ -142,7 +139,7 @@ namespace MalagaJam.LastTrain
 				}
 				break;
 			case "Contempt":
-				switch (currentFeeling.ToString ()) {
+				switch (currentFeeling) {
 				case "Joy":
 					joy += br.baseContempt.Joy;
 					break;
@@ -161,7 +158,7 @@ namespace MalagaJam.LastTrain
 				}
 				break;
 			case "Fury":
-				switch (currentFeeling.ToString ()) {
+				switch (currentFeeling) {
 				case "Joy":
 					joy += br.baseJoy.Joy;
 					break;
@@ -180,7 +177,7 @@ namespace MalagaJam.LastTrain
 				}
 				break;
 			case "Silence":
-				switch (currentFeeling.ToString ()) {
+				switch (currentFeeling) {
 				case "Joy":
 					joy += br.baseSilence.Joy;
 					break;
@@ -214,12 +211,18 @@ namespace MalagaJam.LastTrain
 		/// Muestra la GUI de reiniciar.
 		/// </summary>
 		void triggerTryAgainGUI () {
-			Debug.Log ("TODO: Crear GUI de Reiniciar.");
+			//Debug.Log ("TODO: Crear GUI de Reiniciar.");
 		}
 		#endregion
 
 		#region GAME LOOP
-		// Usa esto para inicializar
+		void Awake () {
+			int pos = Random.Range (0, feelings.Length);
+			currentFeeling = feelings[pos];
+			Debug.Log("Current: " + currentFeeling);
+		}
+
+
 		void Start () {
 
 		}
